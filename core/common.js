@@ -20,3 +20,30 @@ export const getUuiD = (randomLength = 3) => {
     return `${h > 0 ? `${h}小时` : ''}${m > 0 ? `${m}分钟` : ''}${s > 0 ? `${s}秒` : ''}`
   }
 
+
+/**
+ * 复制到剪切板
+ * 参考链接： 链接：https://juejin.cn/post/6844903567480848391
+ */
+export const toClipboard = (value,cb) => {
+	const input = document.createElement('input');
+  // ios 拉起键盘又瞬间收起.<input> 是只读的，就不会拉起键盘了。
+  input.setAttribute('readonly', 'readonly');
+  input.setAttribute('value', value);
+  document.body.appendChild(input);
+  // HTMLInputElement需要获取焦点后执行setSelectionRange方法才会选中
+  input.focus();
+  // input.select() 在ios下并没有选中全部内容，我们需要使用另一个方法来选中内容
+	input.setSelectionRange(0, 9999);
+	if (document.execCommand('copy')) {
+    input.select()
+		document.execCommand('copy');
+    if(typeof cb === 'function'){
+      cb();
+    }
+	}
+  document.body.removeChild(input);
+};
+
+
+
