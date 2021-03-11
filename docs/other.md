@@ -14,7 +14,7 @@
 + 描述：纯前端图片下载
 + 类型：
 ```javascript
-(domImg:HTMLImageElement, fileName:string) => void
+(domImg:HTMLImageElement, fileName:String) => void
 ```
 + 参数：
   - @param { HTMLImageElement } domImg  image元素
